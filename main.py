@@ -5,12 +5,18 @@ from flask_cors import CORS  # Import CORS
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
 
-ACCESS_TOKEN = "660f1622e1665"
+# ACCESS_TOKEN = "660f1622e1665"
+ACCESS_TOKEN = "679369761e77c"
+
+# https://wa.digitizeithub.com/whatsapp_api
+
+# https://wa.digitizeithub.com/whatsapp_profile
+
 
 @app.route('/api/get_qr', methods=['GET'])
 def get_qr():
     # Step 1: Generate instance ID
-    instance_response = requests.get(f"https://chat.hopelearning.net/api/create_instance?access_token={ACCESS_TOKEN}")
+    instance_response = requests.get(f"https://wa.digitizeithub.com/api/create_instance?access_token={ACCESS_TOKEN}")
     if instance_response.status_code != 200:
         return jsonify({"error": "Failed to create instance"}), 500
 
@@ -22,7 +28,7 @@ def get_qr():
 
     # Step 2: Get QR code
     qr_response = requests.get(
-        f"https://chat.hopelearning.net/api/get_qrcode?instance_id={instance_id}&access_token={ACCESS_TOKEN}"
+        f"https://wa.digitizeithub.com/api/get_qrcode?instance_id={instance_id}&access_token={ACCESS_TOKEN}"
     )
     if qr_response.status_code != 200:
         return jsonify({"error": "Failed to get QR code"}), 500
